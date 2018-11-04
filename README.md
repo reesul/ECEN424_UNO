@@ -1,6 +1,5 @@
 # ECEN424_UNO
 
-//YO CAN U GUYS SEE THIS
 
 ## Reese
 - Server
