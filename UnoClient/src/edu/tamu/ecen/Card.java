@@ -54,7 +54,7 @@ public class Card {
         return value.toString();
     }
 
-    public String formatCard() {
+    public String toString() {
         String v = getValueStr();
         String c = getColorStr();
 
