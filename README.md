@@ -7,6 +7,7 @@
   - Create lobby, requiring 3 players to join before playing
     - Once three have joined, set 15 second timer for new players to join
       - New player connecting resets timer
+
     
 
 
@@ -24,7 +25,7 @@ Game-Master
     - Will need to meet to discuss how we format the game state (probably gets its own class)
 
 
-## Rejath
+## Rejath George
 - Client (meet to talk about specifics)
   - connect to specified IP and port (fine to use main thread like MP2)
   - setup input stream reader, output print writer, and scanner (keyboard input) objects
@@ -35,3 +36,4 @@ Game-Master
   - listen to from server for acceptance of card player
     - if refused, reopen scanner and send again
     - if accepted, wait for next normal game state
+ 
