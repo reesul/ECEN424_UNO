@@ -25,7 +25,7 @@ Game-Master
     - Will need to meet to discuss how we format the game state (probably gets its own class)
 
 
-## Rejath
+## Rejath George
 - Client (meet to talk about specifics)
   - connect to specified IP and port (fine to use main thread like MP2)
   - setup input stream reader, output print writer, and scanner (keyboard input) objects
