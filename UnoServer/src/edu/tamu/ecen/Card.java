@@ -94,4 +94,13 @@ public class Card {
         return true;
     }
 
+    @Override
+    public boolean equals(Object card) {
+        if (card.getClass() != Card.class) {
+            return false;
+        }
+        Card c = (Card) card;
+        return (c.getColor() == this.color) && (c.getValue() == this.value);
+    }
+
 }

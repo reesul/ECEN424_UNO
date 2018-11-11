@@ -25,7 +25,7 @@ public class Main {
 
 
         /**
-         * Run the actual game's server here
+         * Run the actual game's server from here on
          */
         try {
             final ServerSocket serverSocket = new ServerSocket(6161);
@@ -41,7 +41,7 @@ public class Main {
             while (players.size() < 3) {
 
                 Socket pSock = serverSocket.accept();
-                //todo allow players to send a name when they connection?
+                //todo allow players to send a name when they connection? Probably not
                 BlockingQueue<String> queue  = new ArrayBlockingQueue<>(15, true);
                 communicationQueue.add(queue);
                 players.add(new Player(players.size()+1, pSock, queue));
@@ -76,11 +76,11 @@ public class Main {
             }
 
             //play the game
+            int winner = -1;
 
-
-            while (Util.getWinner(players)==-1) {
+            while ((winner = Util.getWinner(players))==-1) {
                 //play a turn
-                BlockingQueue<String> curQ=communicationQueue.get(GameState.getCurrentPlayer());
+
                 for (Player p : players) {
                     //send game state info
 
@@ -91,9 +91,31 @@ public class Main {
                         e.printStackTrace();
                     }
                 }
+                Player curPlayer = players.get(GameState.getCurrentPlayer());
+                BlockingQueue<String> curQ=communicationQueue.get(GameState.getCurrentPlayer());
                 try {
-                    String response = curQ.take();
-                    GameState.updateGameState(new Card(response), players);
+                    Card playedCard=null;
+
+                    //Player must play a valid card, if not, ask them again to play a card
+                    while (playedCard == null) {
+                        try {
+                            String response = curQ.take(); //todo reformat if necessary
+                            Card card = new Card(response.split(Const.boundary)[1]);
+
+                            if (Util.validCard(curPlayer.getHand(), card, GameState.getNextCard())) {
+                                playedCard = card;
+                            }
+                            else {
+                                curQ.put(Const.boundary + "Invalid card played, please try another");
+                            }
+
+                        } catch (IllegalArgumentException e) {
+                            System.out.println("Current player attempted to play an invalid card");
+                            curQ.put(Const.boundary + "Invalid String detected, please use the appropriate card format" + Const.boundary);
+                        }
+
+                    }
+                    GameState.updateGameState(playedCard, players);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -102,7 +124,15 @@ public class Main {
 
             //found a winner, shut down threads
             for (Player p : players) {
-                //inform players of who won
+                    //inform each player who won
+                    try {
+                        BlockingQueue<String> queue = p.getQueue();
+                        queue.put(Const.boundary + "Player " + winner + " has won Uno, thank you for playing!" + Const.boundary);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+
+
                 p.interrupt();
             }
 

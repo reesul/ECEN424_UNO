@@ -6,7 +6,7 @@ public class GameState {
 
     private static Card nextCard;
     private static boolean gameDirectionForward; //either forward or backward; when a reverse is played, = !direction
-    private static int currentPlayer;
+    private static int currentPlayer;  // todo, maybe also have player name here?
 
     public static Card getNextCard() {
         return nextCard;
@@ -52,12 +52,15 @@ public class GameState {
 
     public static void updateGameState(Card lastCard, ArrayList<Player> players) {
         //switch case to handle different things since they'll affect other players potentially
+        //cases: reverse, skip,
     }
 
     public static String getGameState() {
         //basically a toString method
+        String state = "Player " + currentPlayer + "'s turn!";
+        state += "\tLast Card Played: " + nextCard.formatCard();
 
-        return "";
+        return state;
     }
 
 

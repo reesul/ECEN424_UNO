@@ -1,9 +1,9 @@
 package edu.tamu.ecen;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Util {
+
 
     public static Card generateCard() {
     //TODO generate rand num, use this to choose a card w/ a switch-case block
@@ -35,9 +35,32 @@ public class Util {
     }
 
     public static String generateMsg(Player p) {
-        return "***game stat***player state***"; //format
+         String gameState = GameState.getGameState();
+         String hand = "";
+
+         for (Card c : p.getHand()) {
+             hand += c.formatCard() + "  ";
+         }
+
+        //return Const.boundary + Const.delimiter + gameState + Const.delimiter + hand + Const.delimiter; //TODO any formatting changes
+        return Const.boundary + gameState + Const.delimiter + hand + Const.boundary;
+
     }
 
+    /*
+    Checks if a played card is actually in the players hand
+     */
+    public static boolean validCard(ArrayList<Card> hand, Card card, Card lastCard) {
+        for (Card c : hand) {
+            if (c.equals(card)) {
+                return true;
+            }
+        }
 
+        //todo check if the card they played is valid compared to the last one
+        //TODO Kyle, please do this part
+
+        return false;
+    }
 
 }
