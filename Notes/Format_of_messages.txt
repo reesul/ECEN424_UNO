@@ -1,0 +1,20 @@
+This file is to describe the format to expect for messages across the socket communication
+
+The server will include a boundary at the start and end of the message, just as a way to make sure we are getting the right messages
+	This is just two dashes; it will be in a file Const.java that can be referenced otherwise
+	To get the message content, do
+		'String content = message.split(Const.boundary)[1];'
+		
+A delimiter is used to separate the game state from the player specific part
+	delimiter is '***', and is in Const file just like boundary
+	game state comes first, includes the last card played and the current player's turn
+		Pull the current player number from the message, if it matches the player's number, then it is their turn, and the scanner should be opened
+			I may have something explicit added to the message as well to let player know if it is their turn; we can discuss this
+	player's hand comes next
+		This should be in the format of cards, |Color,Value| 
+			look at Card class to get better understanding
+		player's hand should be printed, but if it the hand is larger than some number (say 10), then split it up across multiple lines
+	
+When a player has won, a message is sent to tell who that winner was
+	after this arrives, the socket will be closed
+		
