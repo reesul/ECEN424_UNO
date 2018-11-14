@@ -53,7 +53,8 @@ public class Main {
             //once three players have joined, we have enough to play. Allow an extra 15 seconds for more players to join
 
             try {
-                if (players.size() < 10) {
+
+                while (players.size() < 10) {
                     serverSocket.setSoTimeout(15000);
                     Socket pSock = serverSocket.accept();
 
@@ -71,6 +72,8 @@ public class Main {
 
             //initialize the game state
             GameState.initGameState(players.size());
+
+            //Deal each of the players 7 random cards
             for (Player p : players) {
                 p.setHand(Util.dealHand());
             }
@@ -86,6 +89,8 @@ public class Main {
 
                     try {
                         BlockingQueue<String> queue = p.getQueue();
+                        //Send out game state: (Last card played, Next players turn)
+                        //Also send out players hand
                         queue.put(Util.generateMsg(p));
                     } catch (InterruptedException e) {
                         e.printStackTrace();
@@ -102,11 +107,12 @@ public class Main {
                             String response = curQ.take(); //todo reformat if necessary
                             Card card = new Card(response.split(Const.boundary)[1]);
 
+                            //Compare players hand, game state, and played card to check for valid card
                             if (Util.validCard(curPlayer.getHand(), card, GameState.getNextCard())) {
                                 playedCard = card;
                             }
                             else {
-                                curQ.put(Const.boundary + "Invalid card played, please try another");
+                                curQ.put(Const.boundary + "Invalid card played, please try another" + Const.boundary);
                             }
 
                         } catch (IllegalArgumentException e) {
@@ -132,7 +138,7 @@ public class Main {
                         e.printStackTrace();
                     }
 
-
+                //End player threads
                 p.interrupt();
             }
 

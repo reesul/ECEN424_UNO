@@ -53,6 +53,39 @@ public class GameState {
     public static void updateGameState(Card lastCard, ArrayList<Player> players) {
         //switch case to handle different things since they'll affect other players potentially
         //cases: reverse, skip,
+        //Direction of the game
+        //If draw 2 is played, make player draw 2 cards
+            //Get players cards, add 2, increment turn
+
+        if(currentPlayer == maxP) {
+            currentPlayer = 0;
+        }
+
+        //case: skip  --> Increment currentPlayer by 2
+        if(lastCard.getValue() == S) {
+            currentPlayer = currentPlayer + 2;
+        }
+        //case: Reverse --> change gameDirectionForward variable
+        else if(lastCard.getValue() == R) {
+            gameDirectionForward = !gameDirectionForward;
+            currentPlayer++;
+        }
+        //case: Draw two: make next player draw two cards
+        else if(lastCard.getValue() == D2) {
+            //make next player draw two cards
+            currentPlayer++;
+        }
+        else if(lastCard.getValue() == D4) {
+            //make next player draw four cards
+            currentPlayer++;
+        }
+        else if(lastCard.getValue() == W) {
+            //ask player to specify what color they want
+            currentPlayer++;
+        }
+        else {
+            currentPlayer++;
+        }
     }
 
     public static String getGameState() {
