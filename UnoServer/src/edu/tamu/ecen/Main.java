@@ -41,9 +41,14 @@ public class Main {
             while (players.size() < 3) {
 
                 Socket pSock = serverSocket.accept();
-                //todo allow players to send a name when they connection? Probably not
-                BlockingQueue<String> queue  = new ArrayBlockingQueue<>(15, true);
+                //todo allow players to send a name when they connection? Probably not, harder to check for
+
+                BlockingQueue<String> queue = new ArrayBlockingQueue<>(15, true);
                 communicationQueue.add(queue);
+                try {   //let player know who they are so they know when to play
+                queue.put(Const.boundary + "Welcome to UNO! You are Player " + (players.size()+1) + Const.boundary);
+                } catch (InterruptedException e) { e.printStackTrace(); }
+
                 players.add(new Player(players.size()+1, pSock, queue));
                 players.get(players.size()-1).start();
 
