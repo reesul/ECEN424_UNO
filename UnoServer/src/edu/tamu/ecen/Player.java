@@ -89,25 +89,27 @@ public class Player extends Thread {
         //todo make sure this doesn't die
         try {
             while (true) {
+                System.out.println("waiting to take from q");
                 String send = queue.take();
-                if (send.contains("***")) {//delimiter
-                    System.out.println(send);
-                    //send state
-                    writer.println(send);
+                System.out.println("Sending: " + send);
+                //send state
+                writer.println(send);
 
-                    //if current player, then we also need to wait for their response
-                    if (GameState.getCurrentPlayer() == playerNum) {
-                        String response = null;
-                        try {
-                            while ((response = reader.readLine()) == null) ; //block until we get a response
-                            queue.put(response);
+                //if current player, then we also need to wait for their response
+                if (GameState.getCurrentPlayer() == playerNum) {
+                    System.out.println(playerName + "'s thread awaiting response");
+                    String response = null;
+                    try {
+                        while ((response = reader.readLine()) == null) ; //block until we get a response
+                        System.out.println("Player responded with " + response);
+                        queue.put(response);
 
 
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
                     }
                 }
+
 
             }
         }  catch (InterruptedException e) {

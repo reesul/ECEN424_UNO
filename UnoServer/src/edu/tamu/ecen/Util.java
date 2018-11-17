@@ -8,13 +8,13 @@ public class Util {
     public static Card generateCard() {
     //TODO generate rand num, use this to choose a card w/ a switch-case block
 
-        return new Card("R","0"); //update this
+        return new Card("R","N0"); //update this
     }
 
     public static ArrayList<Card> dealHand() {
         ArrayList<Card> hand = new ArrayList<>(7);
 
-        for (int i = 0; i < 7; i++); {
+        for (int i = 0; i < 7; i++) {
             hand.add(generateCard());
         }
 
