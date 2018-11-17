@@ -13,8 +13,15 @@ public class Card {
         this.value = CardValue.valueOf(value);
     }
 
+    //TODO test this more robustly, removing pipes may mess up the indexing currently here
     public Card (String formattedCard) throws IllegalArgumentException {
+        if (formattedCard.contains("|"))
+            formattedCard = formattedCard.split("|")[1];
+
+
         String[] ss = formattedCard.split(",");
+
+
 
         if (ss.length!=2) {
             throw new IllegalArgumentException("Improperly formatted card - use the following Format: |Color,Value|");

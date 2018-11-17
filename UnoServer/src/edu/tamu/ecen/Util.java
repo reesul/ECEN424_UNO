@@ -36,11 +36,15 @@ public class Util {
 
     public static String generateMsg(Player p) {
          String gameState = GameState.getGameState();
-         String hand = "";
+
+
+         StringBuilder handBuilder = new StringBuilder();
 
          for (Card c : p.getHand()) {
-             hand += c.formatCard() + "  ";
+             handBuilder.append(c.formatCard() + "  ");
          }
+
+        String hand = handBuilder.toString();
 
         //return Const.boundary + Const.delimiter + gameState + Const.delimiter + hand + Const.delimiter; //TODO any formatting changes
         return Const.boundary + gameState + Const.delimiter + hand + Const.boundary;

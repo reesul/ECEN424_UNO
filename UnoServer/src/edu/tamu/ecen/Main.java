@@ -50,21 +50,7 @@ public class Main {
                 //todo allow players to send a name when they connection? Probably not, harder to check for
 
                 addNewPlayer(pSock, players, communicationQueue);
-                /*
-                BlockingQueue<String> queue = new ArrayBlockingQueue<>(15, true);
-                communicationQueue.add(queue);
 
-                players.add(new Player(players.size()+1, pSock, queue));
-                players.get(players.size()-1).start();
-
-                try {   //let player know who they are so they know when to play
-                    System.out.println("Welcome player " + players.size());
-                    players.get(players.size()-1).getQueue().put(Const.boundary + "Welcome to UNO! You are Player " + (players.size()+1) + Const.boundary);
-
-                } catch (InterruptedException e) { e.printStackTrace(); }
-
-                System.out.println("Player " + players.size() + " has joined.");
-                */
             }
 
             //once three players have joined, we have enough to play. Allow an extra 15 seconds for more players to join
@@ -77,24 +63,6 @@ public class Main {
                     Socket pSock = serverSocket.accept();
 
                     addNewPlayer(pSock, players, communicationQueue);
-
-                    /*
-
-                    BlockingQueue<String> queue  = new ArrayBlockingQueue<>(15, true);
-                    players.add(new Player(players.size() + 1, pSock, queue));
-                    players.get(players.size()-1).start();
-
-
-                    try {   //let player know who they are so they know when to play
-                        System.out.println("Welcome player " + players.size());
-                        players.get(players.size()-1).getQueue().put(Const.boundary + "Welcome to UNO! You are Player " + (players.size()+1) + Const.boundary);
-
-                    } catch (InterruptedException e) { e.printStackTrace(); }
-
-                    System.out.println("Player " + players.size() + " has joined.");
-                    // start a timer thread to interrupt accept() method after 15 seconds of no connection
-                    //Thread timer
-                    */
 
                 }
             } catch (SocketTimeoutException e) {
@@ -109,7 +77,7 @@ public class Main {
             }
 
             //lobbying works as intended as of 11/17
-            //todo test from here on,
+            //todo test from here on
 
             //play the game
             int winner = -1;
