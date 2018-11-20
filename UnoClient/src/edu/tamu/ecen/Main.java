@@ -1,5 +1,9 @@
-package edu.tamu.ecen.networking;
+package edu.tamu.ecen;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.net.Socket;
 import java.util.Scanner;
 
 public class Main {
@@ -8,7 +12,7 @@ public class Main {
     public static void main(String[] args) {
         try {
             //create connection to server with IP address and TCP Port
-            Socket chatSocket = new Socket(ip, Integer.parseInt(port));
+            Socket chatSocket = new Socket(args[0], Integer.parseInt(args[1]));
             System.out.println("Connection to Server Established");
             //Create input Stream Reader to be able to receive messages from Server
             InputStreamReader stream = new InputStreamReader(chatSocket.getInputStream());
@@ -16,50 +20,57 @@ public class Main {
             //create a buffered reader to read messages in stream
             BufferedReader reader = new BufferedReader(stream);
             
-            int player_number;
-	  
+            int player_number =-1;
+
+
             String message = null;
-	    while ((message = reader.readLine()) == null) {
-            	player_number = Integer.parseInt(message.replaceAll("\\D+","");
-	    }
 
-	    while (true) {
-		while ((message = reader.readLine()) == null) {
-			if (message.contains("*") { //this is the case for messages of during normal gameplay 
+            //get the player number
+			while ((message = reader.readLine()) == null);
+			player_number = Integer.parseInt(message.replaceAll("\\D+",""));
+			System.out.println("You are player " + player_number);
 
-				String[] message_split = message.split("'", 2);
-				String message_beg = message_split[0];
-				String message_end = message_split[1];
-				String[] card_played = message_end.split("*", 2);
+			while (true) {
+				while ((message = reader.readLine()) == null); //block until we receive a message from server
+				if (message.contains("*")) { //this is the case for messages of during normal gameplay
 
-				System.println(card_played[0]);
-				System.println(card_played[1]);
+					System.out.println("Received " + message);
 
-				if (Integer.parseInt(message_beg.replaceAll("\\D+","")) == player_number) {
-					while (!message.contains("ACK")) {
-					Scanner scanner = new Scanner(System.in);
-					System.out.println("Enter a card color.");
-					String card = scan.next();
-					System.out.println("Enter a card value.");
-					String value = scan.next();
-					PrintWriter writer = new PrintWriter(chatSocket.getOutputStream(),true);
-					writer.println(card+","+value);
-					while (message = reader.readLine()) == null);
+					String[] message_split = message.split("'", 2);
+					String message_beg = message_split[0];
+					String message_end = message_split[1];
+					String[] card_played = message_end.split("\\*", 2);
+
+					System.out.println(card_played[0]);
+					System.out.println(card_played[1]);
+
+					if (Integer.parseInt(message_beg.replaceAll("\\D+","")) == player_number) {
+						while (!message.contains("ACK")) {
+						Scanner scanner = new Scanner(System.in);
+						System.out.println("Enter a card color.");
+						String card = scanner.next();
+						System.out.println("Enter a card value.");
+						String value = scanner.next();
+						PrintWriter writer = new PrintWriter(chatSocket.getOutputStream(),true);
+						writer.println(card+","+value);
+						while ((message = reader.readLine()) == null);
+						}
+					}
+
+					else {
+						System.out.println("Please wait for your turn.");
+
 					}
 				}
-	
-				else {
-					System.out.println("Please wait for your turn.");
-					
+				else if (message.contains("won")) {
+					System.out.println(message);
+					chatSocket.close();
+					return;
 				}
-			}	
-			else if (message.contains("won") {
-				System.out.println(message);
-				chatSocket.close();
-				return;
+
 			}
+		} catch (Exception e) {
+        	e.printStackTrace();
 		}
-	}		
-            
-           }
+	}
 } 

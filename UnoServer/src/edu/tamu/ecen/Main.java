@@ -26,7 +26,6 @@ public class Main {
          * End basic testing
          */
 
-
         /**
          * Run the actual game's server from here on
          */
@@ -107,19 +106,21 @@ public class Main {
                         try {
                             String response = curQ.take(); //todo reformat if necessary
                             System.out.println("Player responded with " + response);
-                            Card card = new Card(response.split(Const.boundary)[1]);
+                            Card card = new Card(response);
 
                             if (Util.validCard(curPlayer.getHand(), card, GameState.getNextCard())) {
                                 playedCard = card;
                             }
                             else {
-                                curQ.put(Const.boundary + "Invalid card played, please try another");
+                                curQ.put("Invalid card played, please try another");
                             }
 
                         } catch (IllegalArgumentException e) {
                             System.out.println("Current player attempted to play an invalid card");
-                            curQ.put(Const.boundary + "Invalid String detected, please use the appropriate card format" + Const.boundary);
+                            curQ.put("Invalid String detected, please use the appropriate card format");
                         }
+
+                        curQ.put("ACK");
 
                     }
                     GameState.updateGameState(playedCard, players);
@@ -134,7 +135,7 @@ public class Main {
                     //inform each player who won
                     try {
                         BlockingQueue<String> queue = p.getQueue();
-                        queue.put(Const.boundary + "Player " + winner + " has won Uno, thank you for playing!" + Const.boundary);
+                        queue.put("Player " + winner + " has won Uno, thank you for playing!");
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -162,7 +163,7 @@ public class Main {
 
         try {   //let player know who they are so they know when to play
             System.out.println("Welcome player " + players.size());
-            queue.put(Const.boundary + "Welcome to UNO! You are Player " + (players.size()) + Const.boundary);
+            queue.put("Welcome to UNO! You are Player " + (players.size()));
 
         } catch (InterruptedException e) { e.printStackTrace(); }
 

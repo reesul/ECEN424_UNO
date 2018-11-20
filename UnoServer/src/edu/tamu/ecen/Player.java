@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.net.SocketTimeoutException;
+import java.net.SocketException;
 import java.util.ArrayList;
 import java.util.concurrent.BlockingQueue;
 
@@ -96,7 +98,7 @@ public class Player extends Thread {
                 writer.println(send);
 
                 //if current player, then we also need to wait for their response
-                if (GameState.getCurrentPlayer() == playerNum) {
+                if (GameState.getCurrentPlayer()+1 == playerNum && !send.contains("ACK")) {
                     System.out.println(playerName + "'s thread awaiting response");
                     String response = null;
                     try {
@@ -114,6 +116,8 @@ public class Player extends Thread {
             }
         }  catch (InterruptedException e) {
             System.out.println(playerName = "'s thread shutting down...");
+        }  catch (Exception e) {
+            e.printStackTrace();
         }
 
     }

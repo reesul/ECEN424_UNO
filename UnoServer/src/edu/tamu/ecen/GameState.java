@@ -57,7 +57,7 @@ public class GameState {
 
     public static String getGameState() {
         //basically a toString method
-        String state = "Player " + currentPlayer + "'s turn!";
+        String state = "Player " + (currentPlayer+1) + "'s turn!";
         state += "\tLast Card Played: " + nextCard.formatCard();
 
         return state;

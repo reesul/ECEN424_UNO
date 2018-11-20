@@ -47,10 +47,9 @@ public class Util {
         String hand = handBuilder.toString();
 
         //return Const.boundary + Const.delimiter + gameState + Const.delimiter + hand + Const.delimiter; //TODO any formatting changes
-        return Const.boundary + gameState + Const.delimiter + hand + Const.boundary;
+        return gameState + Const.delimiter + hand;
 
     }
-
     /*
     Checks if a played card is actually in the players hand
      */
