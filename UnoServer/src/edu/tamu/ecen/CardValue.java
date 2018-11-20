@@ -2,7 +2,6 @@ package edu.tamu.ecen;
 
 
 
-
 public enum CardValue {
 
     /*a preceding "N" means this is a number; I had to do this because enums must start with a letter.

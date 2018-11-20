@@ -4,9 +4,12 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketException;
+import java.net.SocketTimeoutException;
 import java.util.ArrayList;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
+
+
 
 public class Main {
 
@@ -27,7 +30,10 @@ public class Main {
         /**
          * Run the actual game's server from here on
          */
+
+
         try {
+            System.out.println("Beginning Lobbying Period");
             final ServerSocket serverSocket = new ServerSocket(6161);
 
 
@@ -41,30 +47,25 @@ public class Main {
             while (players.size() < 3) {
 
                 Socket pSock = serverSocket.accept();
-                //todo allow players to send a name when they connection? Probably not
-                BlockingQueue<String> queue  = new ArrayBlockingQueue<>(15, true);
-                communicationQueue.add(queue);
-                players.add(new Player(players.size()+1, pSock, queue));
-                players.get(players.size()-1).start();
+                //todo allow players to send a name when they connection? Probably not, harder to check for
 
-                System.out.println("Player " + players.size() + " has joined.");
+                addNewPlayer(pSock, players, communicationQueue);
+
             }
 
             //once three players have joined, we have enough to play. Allow an extra 15 seconds for more players to join
+            System.out.println("Three players have joined; we have enough to play\nBut let's wait 15 seconds to see if more connect!");
+
 
             try {
-                if (players.size() < 10) {
-                    serverSocket.setSoTimeout(15000);
+                while (players.size() < 10) {
+                    serverSocket.setSoTimeout(5000); //todo make this 15 seconds again
                     Socket pSock = serverSocket.accept();
 
-                    BlockingQueue<String> queue  = new ArrayBlockingQueue<>(15, true);
-                    players.add(new Player(players.size() + 1, pSock, queue));
-                    System.out.println("Player " + players.size() + " has joined.");
-                    // start a timer thread to interrupt accept() method after 15 seconds of no connection
-                    //Thread timer
+                    addNewPlayer(pSock, players, communicationQueue);
 
                 }
-            } catch (SocketException e) {
+            } catch (SocketTimeoutException e) {
                 System.out.println("Game is starting!!");
             }
 
@@ -74,6 +75,9 @@ public class Main {
             for (Player p : players) {
                 p.setHand(Util.dealHand());
             }
+
+            //lobbying works as intended as of 11/17
+            //todo test from here on
 
             //play the game
             int winner = -1;
@@ -96,10 +100,13 @@ public class Main {
                 try {
                     Card playedCard=null;
 
+
                     //Player must play a valid card, if not, ask them again to play a card
                     while (playedCard == null) {
+                        System.out.println("Waiting input from player " + GameState.getCurrentPlayer());
                         try {
                             String response = curQ.take(); //todo reformat if necessary
+                            System.out.println("Player responded with " + response);
                             Card card = new Card(response.split(Const.boundary)[1]);
 
                             if (Util.validCard(curPlayer.getHand(), card, GameState.getNextCard())) {
@@ -144,4 +151,22 @@ public class Main {
 
 
     }
+
+    private static void addNewPlayer(Socket sock, ArrayList<Player> players, ArrayList<BlockingQueue<String>> communicationQueue) {
+        BlockingQueue<String> queue = new ArrayBlockingQueue<>(15, true);
+        communicationQueue.add(queue);
+
+        players.add(new Player(players.size()+1, sock, queue));
+        Player curPlayer = players.get(players.size()-1);
+        curPlayer.start();
+
+        try {   //let player know who they are so they know when to play
+            System.out.println("Welcome player " + players.size());
+            queue.put(Const.boundary + "Welcome to UNO! You are Player " + (players.size()) + Const.boundary);
+
+        } catch (InterruptedException e) { e.printStackTrace(); }
+
+        System.out.println("Player " + players.size() + " has joined.");
+    }
+
 }

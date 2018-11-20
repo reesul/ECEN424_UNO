@@ -8,13 +8,13 @@ public class Util {
     public static Card generateCard() {
     //TODO generate rand num, use this to choose a card w/ a switch-case block
 
-        return new Card("R","0"); //update this
+        return new Card("R","N0"); //update this
     }
 
     public static ArrayList<Card> dealHand() {
         ArrayList<Card> hand = new ArrayList<>(7);
 
-        for (int i = 0; i < 7; i++); {
+        for (int i = 0; i < 7; i++) {
             hand.add(generateCard());
         }
 
@@ -36,11 +36,15 @@ public class Util {
 
     public static String generateMsg(Player p) {
          String gameState = GameState.getGameState();
-         String hand = "";
+
+
+         StringBuilder handBuilder = new StringBuilder();
 
          for (Card c : p.getHand()) {
-             hand += c.formatCard() + "  ";
+             handBuilder.append(c.formatCard() + "  ");
          }
+
+        String hand = handBuilder.toString();
 
         //return Const.boundary + Const.delimiter + gameState + Const.delimiter + hand + Const.delimiter; //TODO any formatting changes
         return Const.boundary + gameState + Const.delimiter + hand + Const.boundary;
