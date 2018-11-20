@@ -80,9 +80,11 @@ public class Main {
 
             //play the game
             int winner = -1;
+            int turn = 0;
 
             while ((winner = Util.getWinner(players))==-1) {
                 //play a turn
+                System.out.println("Turn " + (++turn));
 
                 for (Player p : players) {
                     //send game state info
@@ -98,6 +100,7 @@ public class Main {
                 BlockingQueue<String> curQ=communicationQueue.get(GameState.getCurrentPlayer());
                 try {
                     Card playedCard=null;
+                    CardColor wildColor = null;
 
 
                     //Player must play a valid card, if not, ask them again to play a card
@@ -105,25 +108,45 @@ public class Main {
                         System.out.println("Waiting input from player " + GameState.getCurrentPlayer());
                         try {
                             String response = curQ.take(); //todo reformat if necessary
-                            System.out.println("Player responded with " + response);
+                            System.out.println("Player responded to main with " + response);
+
+                            if (response.contains("N")) {
+                                //Player did not have valid card to play; TODO give player another card
+                                System.out.println("Player played invalid card... do something about this");
+                                //todo something
+                                playedCard = GameState.getNextCard();
+                                break;
+                            }
+
+                            if (response.contains("W") && response.contains("*")) {
+                                wildColor = CardColor.valueOf(response.split("\\*")[1]);
+                                response = response.split("\\*")[0];
+                            }
+
                             Card card = new Card(response);
 
                             if (Util.validCard(curPlayer.getHand(), card, GameState.getNextCard())) {
                                 playedCard = card;
                             }
                             else {
-                                curQ.put("Invalid card played, please try another");
+                                curQ.put("That card is not in your hand or is not valid for this turn");
+                                Thread.sleep(100); //sleep so the other thread has a chance to take from the Q
                             }
 
                         } catch (IllegalArgumentException e) {
                             System.out.println("Current player attempted to play an invalid card");
                             curQ.put("Invalid String detected, please use the appropriate card format");
+                            Thread.sleep(100); //sleep so the other thread has a chance to take from the Q
                         }
 
+                        System.out.println("Sending acknowledgment");
                         curQ.put("ACK");
+                        Thread.sleep(100); //sleep so the other thread has a chance to take from the Q
 
                     }
-                    GameState.updateGameState(playedCard, players);
+                    if (playedCard.getColorStr().contains("W"))
+                        //TODO parse for extra color
+                    GameState.updateGameState(playedCard, players, wildColor);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -135,7 +158,7 @@ public class Main {
                     //inform each player who won
                     try {
                         BlockingQueue<String> queue = p.getQueue();
-                        queue.put("Player " + winner + " has won Uno, thank you for playing!");
+                        queue.put("Player " + winner + " has won Uno on the " + turn + "th turn, thank you for playing!");
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }

@@ -50,9 +50,15 @@ public class GameState {
     }
 
 
-    public static void updateGameState(Card lastCard, ArrayList<Player> players) {
+    public static void updateGameState(Card lastCard, ArrayList<Player> players, CardColor wildCard) {
         //switch case to handle different things since they'll affect other players potentially
         //cases: reverse, skip,
+
+        //todo if wildCard is not null, then set the nextCard to something that has the requested color
+        if (wildCard != null) {
+            nextCard = new Card(wildCard.toString(), "0");
+        }
+
     }
 
     public static String getGameState() {

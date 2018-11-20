@@ -1,0 +1,4 @@
+Seems that the queues on either side of the connection are having a problem with reading from themselves
+	The dirty trick of adding a delay did nothing for me
+	
+	I think the solution is to have a queue that the server's main only reads from, and it should also only put into the client's thread

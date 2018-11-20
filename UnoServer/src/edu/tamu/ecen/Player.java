@@ -88,10 +88,20 @@ public class Player extends Thread {
             return;
         }
 
+        try {
+            System.out.println("waiting to take from q init");
+            String send = queue.take();
+            System.out.println("Sending: " + send);
+            //send state
+            writer.println(send);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         //todo make sure this doesn't die
         try {
             while (true) {
-                System.out.println("waiting to take from q");
+                System.out.println("waiting to take from q: new turn");
                 String send = queue.take();
                 System.out.println("Sending: " + send);
                 //send state
@@ -103,8 +113,9 @@ public class Player extends Thread {
                     String response = null;
                     try {
                         while ((response = reader.readLine()) == null) ; //block until we get a response
-                        System.out.println("Player responded with " + response);
+                        System.out.println("Player responded to socket with " + response);
                         queue.put(response);
+                        Thread.sleep(100); //sleep to make sure other thread gets to take from Q
 
 
                     } catch (IOException e) {

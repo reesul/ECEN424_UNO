@@ -27,11 +27,10 @@ public class Card {
             throw new IllegalArgumentException("Improperly formatted card - use the following Format: |Color,Value|");
         }
 
-        String c = ss[0].substring(1);
+        String c = ss[0];
 
         //if this is a number, need to append an "N"
         String v = ss[1];
-        v = v.substring(0,v.length()-1);
 
         color = CardColor.valueOf(c);
         if (Character.isDigit(v.charAt(0))) {
