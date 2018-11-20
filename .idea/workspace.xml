@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2f630098-74a5-44b5-b346-664e5482650d" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UnoServer/src/edu/tamu/ecen/GameState.java" beforeDir="false" afterPath="$PROJECT_DIR$/UnoServer/src/edu/tamu/ecen/GameState.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UnoServer/src/edu/tamu/ecen/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/UnoServer/src/edu/tamu/ecen/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UnoServer/src/edu/tamu/ecen/Util.java" beforeDir="false" afterPath="$PROJECT_DIR$/UnoServer/src/edu/tamu/ecen/Util.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -16,28 +15,30 @@
     <session id="-978699310">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
+          <entry key="project.closed" value="1" />
           <entry key="project.open.time.6" value="1" />
-          <entry key="project.opened" value="1" />
+          <entry key="project.open.time.77" value="1" />
+          <entry key="project.opened" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="java" value="8" />
+          <entry key="java" value="9" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="JAVA" value="8" />
+          <entry key="JAVA" value="9" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="java" value="6703" />
+          <entry key="java" value="8792" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="6703" />
+          <entry key="JAVA" value="8792" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.vcs.git.usages" />
@@ -47,12 +48,12 @@
     </session>
   </component>
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/UnoServer/src/edu/tamu/ecen/Card.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="198">
-              <caret line="36" column="14" lean-forward="true" selection-start-line="36" selection-start-column="14" selection-end-line="36" selection-end-column="14" />
+            <state relative-caret-position="-484">
+              <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
             </state>
           </provider>
         </entry>
@@ -61,7 +62,7 @@
         <entry file="file://$PROJECT_DIR$/UnoServer/src/edu/tamu/ecen/CardColor.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="110">
-              <caret line="5" column="13" lean-forward="true" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+              <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
             </state>
           </provider>
         </entry>
@@ -80,11 +81,11 @@
           <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/UnoServer/src/edu/tamu/ecen/GameState.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="506">
-              <caret line="82" column="56" selection-start-line="82" selection-start-column="56" selection-end-line="82" selection-end-column="56" />
+            <state relative-caret-position="220">
+              <caret line="75" column="59" lean-forward="true" selection-start-line="75" selection-start-column="59" selection-end-line="75" selection-end-column="59" />
             </state>
           </provider>
         </entry>
@@ -92,22 +93,26 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/UnoServer/src/edu/tamu/ecen/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="109" column="28" lean-forward="true" selection-start-line="109" selection-start-column="28" selection-end-line="109" selection-end-column="103" />
+            <state relative-caret-position="208">
+              <caret line="77" column="25" selection-start-line="77" selection-start-column="25" selection-end-line="77" selection-end-column="25" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/UnoServer/src/edu/tamu/ecen/Player.java">
-          <provider selected="true" editor-type-id="text-editor" />
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="164">
+              <caret line="27" column="21" selection-start-line="27" selection-start-column="21" selection-end-line="27" selection-end-column="21" />
+            </state>
+          </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/UnoServer/src/edu/tamu/ecen/Util.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="833">
-              <caret line="198" column="9" lean-forward="true" selection-start-line="198" selection-start-column="9" selection-end-line="198" selection-end-column="9" />
+            <state relative-caret-position="296">
+              <caret line="139" column="5" selection-start-line="139" selection-start-column="5" selection-end-line="139" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -120,6 +125,15 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>valid</find>
+      <find>setH</find>
+      <find>generateCard</find>
+      <find>card</find>
+      <find>get</find>
+      <find>arraylist</find>
+      <find>hand.add</find>
+      <find>setHand</find>
+      <find>dealHand</find>
+      <find>generate</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -129,8 +143,8 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/UnoServer/src/edu/tamu/ecen/Main.java" />
-        <option value="$PROJECT_DIR$/UnoServer/src/edu/tamu/ecen/Util.java" />
         <option value="$PROJECT_DIR$/UnoServer/src/edu/tamu/ecen/GameState.java" />
+        <option value="$PROJECT_DIR$/UnoServer/src/edu/tamu/ecen/Util.java" />
       </list>
     </option>
   </component>
@@ -140,11 +154,11 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-9" />
-    <option name="y" value="-9" />
-    <option name="width" value="977" />
-    <option name="height" value="1038" />
+  <component name="ProjectFrameBounds" extendedState="7">
+    <option name="x" value="-10" />
+    <option name="y" value="-10" />
+    <option name="width" value="978" />
+    <option name="height" value="1039" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -205,6 +219,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1542685800130" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -231,44 +246,55 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1542145433334</updated>
-      <workItem from="1542145435813" duration="8752000" />
+      <workItem from="1542145435813" duration="8961000" />
+      <workItem from="1542680217635" duration="5534000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="8752000" />
+    <option name="totallyTimeSpent" value="14495000" />
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Image Layers" />
-      <window_info id="Designer" />
-      <window_info id="UI Designer" />
-      <window_info id="Capture Tool" />
-      <window_info id="Favorites" side_tool="true" />
-      <window_info content_ui="combo" id="Project" order="0" weight="0.5159501" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.51543623" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Database Changes" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" />
-      <window_info anchor="bottom" id="Terminal" />
-      <window_info anchor="bottom" id="Event Log" side_tool="true" />
+      <window_info id="Image Layers" order="2" />
+      <window_info id="Designer" order="3" />
+      <window_info id="UI Designer" order="4" />
+      <window_info id="Capture Tool" order="5" />
+      <window_info id="Favorites" order="6" side_tool="true" />
+      <window_info anchor="bottom" id="Messages" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="right" id="Palette" />
-      <window_info anchor="right" id="Theme Preview" />
-      <window_info anchor="right" id="Capture Analysis" />
-      <window_info anchor="right" id="Palette&#9;" />
-      <window_info anchor="right" id="Database" />
-      <window_info anchor="right" id="Maven Projects" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.32907802" />
+      <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Terminal" order="8" />
+      <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
+      <window_info anchor="bottom" id="Version Control" order="10" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Palette" order="3" />
+      <window_info anchor="right" id="Capture Analysis" order="4" />
+      <window_info anchor="right" id="Theme Preview" order="5" />
+      <window_info anchor="right" id="Palette&#9;" order="6" />
+      <window_info anchor="right" id="Database" order="7" />
+      <window_info anchor="right" id="Maven Projects" order="8" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -281,30 +307,6 @@
     <entry file="file://$PROJECT_DIR$/UnoServer/src/edu/tamu/ecen/Const.java">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/UnoServer/src/edu/tamu/ecen/CardColor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="110">
-          <caret line="5" column="13" lean-forward="true" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/UnoServer/src/edu/tamu/ecen/Card.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="36" column="14" lean-forward="true" selection-start-line="36" selection-start-column="14" selection-end-line="36" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/UnoServer/src/edu/tamu/ecen/Player.java">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/UnoServer/src/edu/tamu/ecen/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="109" column="28" lean-forward="true" selection-start-line="109" selection-start-column="28" selection-end-line="109" selection-end-column="103" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/UnoServer/src/edu/tamu/ecen/CardValue.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="220">
@@ -312,20 +314,48 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/UnoServer/src/edu/tamu/ecen/Util.java">
+    <entry file="file://$PROJECT_DIR$/UnoServer/src/edu/tamu/ecen/CardColor.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="833">
-          <caret line="198" column="9" lean-forward="true" selection-start-line="198" selection-start-column="9" selection-end-line="198" selection-end-column="9" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="110">
+          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UnoServer/src/edu/tamu/ecen/Card.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-484">
+          <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UnoServer/src/edu/tamu/ecen/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="208">
+          <caret line="77" column="25" selection-start-line="77" selection-start-column="25" selection-end-line="77" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UnoServer/src/edu/tamu/ecen/Player.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="164">
+          <caret line="27" column="21" selection-start-line="27" selection-start-column="21" selection-end-line="27" selection-end-column="21" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/UnoServer/src/edu/tamu/ecen/GameState.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="506">
-          <caret line="82" column="56" selection-start-line="82" selection-start-column="56" selection-end-line="82" selection-end-column="56" />
+        <state relative-caret-position="220">
+          <caret line="75" column="59" lean-forward="true" selection-start-line="75" selection-start-column="59" selection-end-line="75" selection-end-column="59" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UnoServer/src/edu/tamu/ecen/Util.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="296">
+          <caret line="139" column="5" selection-start-line="139" selection-start-column="5" selection-end-line="139" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

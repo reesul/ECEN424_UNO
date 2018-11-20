@@ -49,6 +49,18 @@ public class GameState {
         gameDirectionForward = true;
     }
 
+    //increments player count by 1
+    public static int incrementPlayers() {
+        if(currentPlayer == maxP) {
+            currentPlayer = 0;
+        }
+        else {
+            currentPlayer++;
+        }
+
+        return currentPlayer;
+    }
+
 
     public static void updateGameState(Card lastCard, ArrayList<Player> players) {
         //switch case to handle different things since they'll affect other players potentially
@@ -57,35 +69,83 @@ public class GameState {
         //If draw 2 is played, make player draw 2 cards
             //Get players cards, add 2, increment turn
 
-        if(currentPlayer == maxP) {
-            currentPlayer = 0;
+        //To Remove card from players hand:
+        //get currentPlayer
+        //get currentPlayer's hand
+        //check which of their cards matches with last card  played (equals checks if one card is equal to another)
+        //replace that card with a new card (generate card)
+        //set players hand
+        int handSize = 0;
+        int i = 0;
+
+        Player currPlayer = players.get(currentPlayer);
+        ArrayList<Card> hand = currPlayer.getHand();
+        handSize = hand.size();
+        for(i = 0; i < handSize; i++) {
+            if(hand[i].equals(lastCard)) {
+                //remove card from players hand
+                list.remove(hand[i]);
+                //array = ArrayUtils.removeElement(array, element)
+            }
         }
+
+        currPlayer.setHand(hand);
 
         //case: skip  --> Increment currentPlayer by 2
         if(lastCard.getValue() == S) {
-            currentPlayer = currentPlayer + 2;
+            currentPlayer = incrementPlayers();
+            currentPlayer = incrementPlayers();
         }
         //case: Reverse --> change gameDirectionForward variable
         else if(lastCard.getValue() == R) {
             gameDirectionForward = !gameDirectionForward;
-            currentPlayer++;
+            currentPlayer = incrementPlayers();
         }
         //case: Draw two: make next player draw two cards
         else if(lastCard.getValue() == D2) {
             //make next player draw two cards
-            currentPlayer++;
+            //First get next player
+            //Then get player's hand
+            //then generate a card and add it to that players Hand
+
+            //could be out of bounds if currentPlayer is maxPlayers
+            Player p = players.get(currentPlayer = incrementPlayers());
+            ArrayList<Card> hand = p.getHand();
+            hand.add(generateCard());
+            hand.add(generateCard());
+            p.setHand(hand);
+
+            currentPlayer = incrementPlayers();
         }
+        //case: Draw Four
         else if(lastCard.getValue() == D4) {
             //make next player draw four cards
-            currentPlayer++;
+            //get next player
+            //create new hand with size of current players hand + 4
+            //set that new hand equal to the players hand
+            //add 4 cards to the players hand, then set their hand
+
+            Player p = players.get(currentPlayer = incrementPlayers());
+            ArrayList<Card> hand = p.getHand();
+            hand.add(generateCard());
+            hand.add(generateCard());
+            hand.add(generateCard());
+            hand.add(generateCard());
+            p.setHand(hand);
+
+            currentPlayer = incrementPlayers();
         }
         else if(lastCard.getValue() == W) {
-            //ask player to specify what color they want
-            currentPlayer++;
+            currentPlayer = incrementPlayers();
         }
         else {
-            currentPlayer++;
+            //normal card played
+            currentPlayer = incrementPlayers();
         }
+
+        //Do I need to do anything else here?
+        //set nextCard to last card played
+        nextCard = lastCard;
     }
 
     public static String getGameState() {
