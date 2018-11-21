@@ -6,3 +6,9 @@ Seems that the queues on either side of the connection are having a problem with
 Yep, having unidirectional queues fixed the issue as I suspected
 	 client side seems robust enough to incorrect format for cards and cards not in their hand, even though all of those checks are done server-side
 	 client-server connection seems to be correct so far with very basic inputs, going to try combining the game rules with the client-server implementation
+	 
+Debugging some small gameplay issues, most are straightforward to fix
+		for some reason, I was able to play a D2 when the actual value was 2
+		**seems to be working pretty well, but having some problems with wild cards at the moment
+		
+		direction of gameplay seems to be correct amid skips and draws

@@ -109,4 +109,12 @@ public class Card {
         return (c.getColor() == this.color) && (c.getValue() == this.value);
     }
 
+
+    @Override
+    public String toString() {
+        return "|" +
+                "" + color +
+                "," + value +
+                '|';
+    }
 }

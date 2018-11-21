@@ -7,8 +7,6 @@ import java.net.SocketTimeoutException;
 import java.util.ArrayList;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.Semaphore;
-
 
 public class Main {
 
@@ -25,11 +23,10 @@ public class Main {
          * End basic testing
          */
 
+
         /**
          * Run the actual game's server from here on
          */
-
-
         try {
             System.out.println("Beginning Lobbying Period");
             final ServerSocket serverSocket = new ServerSocket(6161);
@@ -72,12 +69,11 @@ public class Main {
 
             //initialize the game state
             GameState.initGameState(players.size());
+
+            //Deal each of the players 7 random cards
             for (Player p : players) {
                 p.setHand(Util.dealHand());
             }
-
-            //lobbying works as intended as of 11/17
-            //todo test from here on
 
             //play the game
             int winner = -1;
@@ -111,10 +107,8 @@ public class Main {
                             String response = recQueue.take(); //todo reformat if necessary
                             System.out.println("Player responded to main with " + response);
 
-                            if (response.contains("N")) {
-                                //Player did not have valid card to play; TODO give player another card
-                                System.out.println("Player played invalid card... do something about this");
-                                //todo something
+                            if (response.contains("N")) { //give the player a another card
+                                curPlayer.getHand().add(Util.generateCard());
                                 playedCard = GameState.getNextCard();
                                 break;
                             }
@@ -126,6 +120,7 @@ public class Main {
 
                             Card card = new Card(response);
 
+                            //Compare players hand, game state, and played card to check for valid card
                             if (Util.validCard(curPlayer.getHand(), card, GameState.getNextCard())) {
                                 playedCard = card;
                                 System.out.println("Played valid card");
@@ -147,9 +142,17 @@ public class Main {
                     sendQueue.put("ACK");
 //                  Thread.sleep(100); //sleep so the other thread has a chance to take from the Q
 
-                    if (playedCard.getColorStr().contains("W"))
-                        //TODO parse for extra color
-                    GameState.updateGameState(playedCard, players, wildColor);
+//                    if (playedCard.getColorStr().contains("W")) {
+//                        //TODO parse for extra color
+//                        wildColor = CardColor.valueOf()
+//                    }
+
+                    if (!playedCard.toString().contains("N")) { //if a player had to draw, don't apply the last card
+                        GameState.updateGameState(playedCard, players, wildColor); //comment out if rule requiring player to draw until they can play
+                    } else {
+                        GameState.incrementPlayers();
+                    }
+
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -166,7 +169,7 @@ public class Main {
                         e.printStackTrace();
                     }
 
-
+                //End player threads
                 p.interrupt();
             }
 
