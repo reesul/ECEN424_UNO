@@ -2,3 +2,7 @@ Seems that the queues on either side of the connection are having a problem with
 	The dirty trick of adding a delay did nothing for me
 	
 	I think the solution is to have a queue that the server's main only reads from, and it should also only put into the client's thread
+	
+Yep, having unidirectional queues fixed the issue as I suspected
+	 client side seems robust enough to incorrect format for cards and cards not in their hand, even though all of those checks are done server-side
+	 client-server connection seems to be correct so far with very basic inputs, going to try combining the game rules with the client-server implementation

@@ -5,8 +5,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
-import java.net.SocketTimeoutException;
-import java.net.SocketException;
 import java.util.ArrayList;
 import java.util.concurrent.BlockingQueue;
 
@@ -16,15 +14,16 @@ public class Player extends Thread {
     private Socket sock;
     private String playerName;
     private ArrayList<Card> hand;
-    private BlockingQueue<String> queue;
+    private BlockingQueue<String> rQueue;
+    private BlockingQueue<String> tQueue;
 
 
-    public BlockingQueue<String> getQueue() {
-        return queue;
+    public BlockingQueue<String> getrQueue() {
+        return rQueue;
     }
 
-    public void setQueue(BlockingQueue<String> queue) {
-        this.queue = queue;
+    public void setrQueue(BlockingQueue<String> rQueue) {
+        this.rQueue = rQueue;
     }
 
     public int getPlayerNum() {
@@ -60,17 +59,19 @@ public class Player extends Thread {
     }
 
 
-    public Player(int playerNum, Socket sock, BlockingQueue<String> queue) {
+    public Player(int playerNum, Socket sock, BlockingQueue<String> rQueue, BlockingQueue<String> tQueue) {
         this.playerNum = playerNum;
         this.sock = sock;
-        this.queue = queue;
+        this.rQueue = rQueue;
+        this.tQueue = tQueue;
         playerName = "Player " + playerNum;
     }
 
-    public Player(int playerNum, Socket sock, String name, BlockingQueue<String> queue) {
+    public Player(int playerNum, Socket sock, String name, BlockingQueue<String> rQueue, BlockingQueue<String> tQueue) {
         this.playerNum = playerNum;
         this.sock = sock;
-        this.queue = queue;
+        this.rQueue = rQueue;
+        this.tQueue = tQueue;
         playerName = name;
     }
 
@@ -90,7 +91,7 @@ public class Player extends Thread {
 
         try {
             System.out.println("waiting to take from q init");
-            String send = queue.take();
+            String send = rQueue.take();
             System.out.println("Sending: " + send);
             //send state
             writer.println(send);
@@ -102,8 +103,8 @@ public class Player extends Thread {
         try {
             while (true) {
                 System.out.println("waiting to take from q: new turn");
-                String send = queue.take();
-                System.out.println("Sending: " + send);
+                String send = rQueue.take();
+                System.out.println("Sending to player "+playerNum+": " + send);
                 //send state
                 writer.println(send);
 
@@ -113,9 +114,9 @@ public class Player extends Thread {
                     String response = null;
                     try {
                         while ((response = reader.readLine()) == null) ; //block until we get a response
-                        System.out.println("Player responded to socket with " + response);
-                        queue.put(response);
-                        Thread.sleep(100); //sleep to make sure other thread gets to take from Q
+                        System.out.println("Player " + playerNum + " responded to socket with " + response);
+                        tQueue.put(response);
+//                        Thread.sleep(100); //sleep to make sure other thread gets to take from Q
 
 
                     } catch (IOException e) {

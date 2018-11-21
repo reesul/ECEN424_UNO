@@ -3,12 +3,11 @@ package edu.tamu.ecen;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.net.SocketException;
 import java.net.SocketTimeoutException;
 import java.util.ArrayList;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
-
+import java.util.concurrent.Semaphore;
 
 
 public class Main {
@@ -41,6 +40,8 @@ public class Main {
             //max of ten players
             ArrayList<Player> players = new ArrayList<>(10);
             ArrayList<BlockingQueue<String>> communicationQueue = new ArrayList<>(); //use put and take for unlimited blocking
+            BlockingQueue<String> recQueue = new ArrayBlockingQueue<>(15, true);
+
 
             // wait until 3 players have joined
             while (players.size() < 3) {
@@ -48,7 +49,7 @@ public class Main {
                 Socket pSock = serverSocket.accept();
                 //todo allow players to send a name when they connection? Probably not, harder to check for
 
-                addNewPlayer(pSock, players, communicationQueue);
+                addNewPlayer(pSock, players, communicationQueue, recQueue);
 
             }
 
@@ -58,10 +59,10 @@ public class Main {
 
             try {
                 while (players.size() < 10) {
-                    serverSocket.setSoTimeout(5000); //todo make this 15 seconds again
+                    serverSocket.setSoTimeout(1000); //todo make this 15 seconds again
                     Socket pSock = serverSocket.accept();
 
-                    addNewPlayer(pSock, players, communicationQueue);
+                    addNewPlayer(pSock, players, communicationQueue, recQueue);
 
                 }
             } catch (SocketTimeoutException e) {
@@ -84,20 +85,20 @@ public class Main {
 
             while ((winner = Util.getWinner(players))==-1) {
                 //play a turn
-                System.out.println("Turn " + (++turn));
+                System.out.println("Turn " + (++turn)+"\n");
 
                 for (Player p : players) {
                     //send game state info
 
                     try {
-                        BlockingQueue<String> queue = p.getQueue();
-                        queue.put(Util.generateMsg(p));
+                        BlockingQueue<String> sendQueue = p.getrQueue();
+                        sendQueue.put(Util.generateMsg(p));
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
                 }
                 Player curPlayer = players.get(GameState.getCurrentPlayer());
-                BlockingQueue<String> curQ=communicationQueue.get(GameState.getCurrentPlayer());
+                BlockingQueue<String> sendQueue=communicationQueue.get(GameState.getCurrentPlayer());
                 try {
                     Card playedCard=null;
                     CardColor wildColor = null;
@@ -107,7 +108,7 @@ public class Main {
                     while (playedCard == null) {
                         System.out.println("Waiting input from player " + GameState.getCurrentPlayer());
                         try {
-                            String response = curQ.take(); //todo reformat if necessary
+                            String response = recQueue.take(); //todo reformat if necessary
                             System.out.println("Player responded to main with " + response);
 
                             if (response.contains("N")) {
@@ -127,23 +128,25 @@ public class Main {
 
                             if (Util.validCard(curPlayer.getHand(), card, GameState.getNextCard())) {
                                 playedCard = card;
+                                System.out.println("Played valid card");
                             }
                             else {
-                                curQ.put("That card is not in your hand or is not valid for this turn");
-                                Thread.sleep(100); //sleep so the other thread has a chance to take from the Q
+                                sendQueue.put("That card is not in your hand or is not valid for this turn");
+//                                Thread.sleep(100); //sleep so the other thread has a chance to take from the Q
                             }
 
                         } catch (IllegalArgumentException e) {
                             System.out.println("Current player attempted to play an invalid card");
-                            curQ.put("Invalid String detected, please use the appropriate card format");
-                            Thread.sleep(100); //sleep so the other thread has a chance to take from the Q
+                            sendQueue.put("Invalid String detected, please use the appropriate card format");
+//                            Thread.sleep(100); //sleep so the other thread has a chance to take from the Q
                         }
 
-                        System.out.println("Sending acknowledgment");
-                        curQ.put("ACK");
-                        Thread.sleep(100); //sleep so the other thread has a chance to take from the Q
-
                     }
+                    //handle end of successfully played card
+                    System.out.println("Sending acknowledgment");
+                    sendQueue.put("ACK");
+//                  Thread.sleep(100); //sleep so the other thread has a chance to take from the Q
+
                     if (playedCard.getColorStr().contains("W"))
                         //TODO parse for extra color
                     GameState.updateGameState(playedCard, players, wildColor);
@@ -157,7 +160,7 @@ public class Main {
             for (Player p : players) {
                     //inform each player who won
                     try {
-                        BlockingQueue<String> queue = p.getQueue();
+                        BlockingQueue<String> queue = p.getrQueue();
                         queue.put("Player " + winner + " has won Uno on the " + turn + "th turn, thank you for playing!");
                     } catch (InterruptedException e) {
                         e.printStackTrace();
@@ -176,11 +179,11 @@ public class Main {
 
     }
 
-    private static void addNewPlayer(Socket sock, ArrayList<Player> players, ArrayList<BlockingQueue<String>> communicationQueue) {
+    private static void addNewPlayer(Socket sock, ArrayList<Player> players, ArrayList<BlockingQueue<String>> communicationQueue, BlockingQueue<String> tQueue) {
         BlockingQueue<String> queue = new ArrayBlockingQueue<>(15, true);
         communicationQueue.add(queue);
 
-        players.add(new Player(players.size()+1, sock, queue));
+        players.add(new Player(players.size()+1, sock, queue, tQueue));
         Player curPlayer = players.get(players.size()-1);
         curPlayer.start();
 

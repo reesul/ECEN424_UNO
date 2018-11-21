@@ -34,12 +34,11 @@ public class Main {
 				while ((message = reader.readLine()) == null); //block until we receive a message from server
 				if (message.contains("*")) { //this is the case for messages of during normal gameplay
 
-					System.out.println("Received: " + message);
+//					System.out.println("Received: " + message);
 
 					String[] message_split = message.split("'", 2);
 					String message_beg = message_split[0];
-					String message_end = message_split[1];
-					String[] card_played = message_end.split("\\*", 2);
+					String[] card_played = message.split("\\*", 2);
 
 					System.out.println(card_played[0]);
 					System.out.println(card_played[1]);
@@ -75,8 +74,10 @@ public class Main {
 							if (!message.contains("ACK")) {
 								System.out.println(message);
 							}
-							else
+							else {
 								System.out.println("Card played successfully\n");
+								break;
+							}
 						}
 
 					}
