@@ -1,14 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1ebbc380-25d7-464a-90d1-fdea12cdb523" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../Notes/Debug notes.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../Notes/Debug notes.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/edu/tamu/ecen/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/tamu/ecen/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../UnoServer/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../UnoServer/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../UnoServer/src/edu/tamu/ecen/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/../UnoServer/src/edu/tamu/ecen/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../UnoServer/src/edu/tamu/ecen/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/../UnoServer/src/edu/tamu/ecen/Player.java" afterDir="false" />
-    </list>
+    <list default="true" id="1ebbc380-25d7-464a-90d1-fdea12cdb523" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -73,7 +66,7 @@
         <entry file="file://$PROJECT_DIR$/src/edu/tamu/ecen/Main.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="404">
-              <caret line="78" column="38" selection-start-line="78" selection-start-column="38" selection-end-line="78" selection-end-column="38" />
+              <caret line="80" column="25" selection-start-line="80" selection-start-column="25" selection-end-line="80" selection-end-column="25" />
             </state>
           </provider>
         </entry>
@@ -260,7 +253,7 @@
     <entry file="file://$PROJECT_DIR$/src/edu/tamu/ecen/Main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="404">
-          <caret line="78" column="38" selection-start-line="78" selection-start-column="38" selection-end-line="78" selection-end-column="38" />
+          <caret line="80" column="25" selection-start-line="80" selection-start-column="25" selection-end-line="80" selection-end-column="25" />
         </state>
       </provider>
     </entry>
