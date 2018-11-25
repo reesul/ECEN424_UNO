@@ -127,7 +127,7 @@ public class Player extends Thread {
 
             }
         }  catch (InterruptedException e) {
-            System.out.println(playerName = "'s thread shutting down...");
+            System.out.println(playerName + "'s thread shutting down...");
         }  catch (Exception e) {
             e.printStackTrace();
         }

@@ -12,21 +12,6 @@ public class Main {
 
     public static void main(String[] args) {
 
-        /**
-         * Do basic testing here!!!
-         */
-
-        boolean t = false;
-        if (t) return;
-
-        /**
-         * End basic testing
-         */
-
-
-        /**
-         * Run the actual game's server from here on
-         */
         try {
             System.out.println("Beginning Lobbying Period");
             final ServerSocket serverSocket = new ServerSocket(6161);
@@ -75,13 +60,18 @@ public class Main {
                 p.setHand(Util.dealHand());
             }
 
-            //play the game
+            //set up some variables for controlling the game
             int winner = -1;
             int turn = 0;
+            boolean drawCard = false; //true if player does not have any cards they can play
+
+            //play the game
+
 
             while ((winner = Util.getWinner(players))==-1) {
                 //play a turn
-                System.out.println("Turn " + (++turn)+"\n");
+                System.out.println("\nTurn " + (++turn)+"\n");
+                drawCard = false;
 
                 for (Player p : players) {
                     //send game state info
@@ -109,7 +99,8 @@ public class Main {
 
                             if (response.contains("N")) { //give the player a another card
                                 curPlayer.getHand().add(Util.generateCard());
-                                playedCard = GameState.getNextCard();
+                                //playedCard = GameState.getNextCard(); //shouldn't need to do this - do not update game state in this case; only increment player
+                                drawCard = true;
                                 break;
                             }
 
@@ -147,7 +138,7 @@ public class Main {
 //                        wildColor = CardColor.valueOf()
 //                    }
 
-                    if (!playedCard.toString().contains("N")) { //if a player had to draw, don't apply the last card
+                    if (!drawCard) { //if a player had to draw, don't apply the last card
                         GameState.updateGameState(playedCard, players, wildColor); //comment out if rule requiring player to draw until they can play
                     } else {
                         GameState.incrementPlayers();
@@ -164,7 +155,7 @@ public class Main {
                     //inform each player who won
                     try {
                         BlockingQueue<String> queue = p.getrQueue();
-                        queue.put("Player " + winner + " has won Uno on the " + turn + "th turn, thank you for playing!");
+                        queue.put("Player " + (winner+1) + " has won Uno on the " + turn + "th turn, thank you for playing!");
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }

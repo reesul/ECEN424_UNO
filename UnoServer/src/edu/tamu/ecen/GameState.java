@@ -162,14 +162,17 @@ public class GameState {
 
             next = incrementPlayers();
         }
-        else if(lastCard.getColor() == CardColor.W) {
-            lastCard = new Card(wildCard.toString(), "W"); //todo check better
+
+        if(lastCard.getColor() == CardColor.W) {
+            if (wildCard == null) {
+                System.out.println("Error with Wild card being played but no new valid color provided");
+            }
+            lastCard = new Card(wildCard.toString(), lastCard.getValueStr()); //todo check better
         }
         else {
             //normal card played
         }
 
-        //Do I need to do anything else here?
         //set nextCard to last card played
         currentPlayer = next;
         nextCard = lastCard;

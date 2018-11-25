@@ -46,10 +46,11 @@ public class Main {
 					if (Integer.parseInt(message_beg.replaceAll("\\D+","")) == player_number) {
 						while (!message.contains("ACK")) {
 							Scanner scanner = new Scanner(System.in);
+
 							System.out.println("Enter a card color. If no valid card, enter N:");
-							String card = scanner.next();
+							String card = scanner.next().toUpperCase();
 							System.out.println("Enter a card value. If no valid card, enter N:");
-							String value = scanner.next();
+							String value = scanner.next().toUpperCase();
 
 							String send = card+","+value;
 							if (card.contains("W")) {
@@ -57,7 +58,7 @@ public class Main {
 								String s = "";
 								while (!s.equals("R") && !s.equals("B") && !s.equals("G") && !s.equals("Y")) {
 									try {
-										s = scanner.next();
+										s = scanner.next().toUpperCase();
 										CardValue.valueOf(s);
 									} catch (IllegalArgumentException e) {
 										System.out.println("please enter a valid color: R, G, B, or Y");

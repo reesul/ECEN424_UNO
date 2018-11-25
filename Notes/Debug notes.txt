@@ -12,3 +12,10 @@ Debugging some small gameplay issues, most are straightforward to fix
 		**seems to be working pretty well, but having some problems with wild cards at the moment
 		
 		direction of gameplay seems to be correct amid skips and draws
+		
+		
+Seems to be some problems with skips and card drawing (none good in hand)
+
+
+All is well, I am not finding any more issues that are game breaking, though I am sure that some exist
+	client input is robust to typos, and allows lower case to be used
